@@ -19,10 +19,17 @@ go install github.com/gopherci/isFileGenerated
 isFileGenerated <root directory> <path to file>
 ```
 
+# Example
+
 ```bash
-isFileGenerated $GOPATH/src/github.com/hydroflame/fuzzi fuzzi/fuzzy.go
+isFileGenerated $GOPATH/src/github.com/hydroflame/fuzzi fuzzi/fuzzy.go; echo $?
 github.com/hydroflame/fuzzi/fuzzi/fuzzy.go was not generated
-isFileGenerated $GOPATH/src/github.com/hydroflame/fuzzi vendor/github.com/go-kit/kit/endpoint/endpoint.go
+1
+```
+
+```bash
+isFileGenerated $GOPATH/src/github.com/hydroflame/fuzzi vendor/github.com/go-kit/kit/endpoint/endpoint.go; echo $?
 github.com/hydroflame/fuzzi/vendor/github.com/go-kit/kit/endpoint/endpoint.go was generated
+0
 ```
 
