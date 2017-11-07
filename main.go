@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 
-	"github.com/shurcooL/go/analysis"
+	"github.com/shurcooL/go/generated"
 )
 
 func main() {
@@ -14,13 +15,15 @@ func main() {
 		os.Exit(2)
 	}
 
-	generated, err := analysis.IsFileGenerated(os.Args[1], os.Args[2])
+	generated, err := generated.ParseFile(filepath.Join(os.Args[1], os.Args[2]))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error checking if %q is generated: %v\n", os.Args[2], err)
+		fmt.Fprintf(os.Stderr, "error checking if %q has generated comment: %v\n", os.Args[2], err)
 		os.Exit(3)
 	}
 
-	if strings.HasPrefix(os.Args[2], "testdata/") || strings.Contains(os.Args[2], "/testdata/") {
+	if strings.HasPrefix(os.Args[2], "vendor/") || strings.Contains(os.Args[2], "/vendor/") ||
+		strings.HasPrefix(os.Args[2], "Godeps/") ||
+		strings.HasPrefix(os.Args[2], "testdata/") || strings.Contains(os.Args[2], "/testdata/") {
 		generated = true
 	}
 
