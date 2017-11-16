@@ -2,8 +2,10 @@
 
 `isFileGenerated` checks if a file is generated. A file is generated if
 
-- [github.com/shurcooL/go/analysis#IsFileGenerated](https://godoc.org/github.com/shurcooL/go/analysis#IsFileGenerated) returns true, or
-- path contains a directory labelled `testdata`.
+- file contains a "// Code generated … DO NOT EDIT." line comment, as specified at https://golang.org/s/generatedcode, or
+- path contains a directory named `vendor`, or
+- path starts with a directory named `Godeps`, or
+- path contains a directory named `testdata`.
 
 Sets the exit status 0 if file is generated, 1 if not generated, or > 1 for other error.
 
@@ -32,4 +34,3 @@ isFileGenerated $GOPATH/src/github.com/hydroflame/fuzzi vendor/github.com/go-kit
 github.com/hydroflame/fuzzi/vendor/github.com/go-kit/kit/endpoint/endpoint.go was generated
 0
 ```
-
