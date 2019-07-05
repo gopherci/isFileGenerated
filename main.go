@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/shurcooL/go/generated"
+	"dmitri.shuralyov.com/go/generated"
 )
 
 func main() {
